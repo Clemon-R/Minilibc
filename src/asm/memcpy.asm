@@ -1,6 +1,7 @@
 	global	memcpy:function
 	section	.text
 memcpy:
+	xor	rcx, rcx
 	mov	rax, -1
 	add	rdx, -1
 	cmp	rax, rdx

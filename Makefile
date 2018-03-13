@@ -7,6 +7,7 @@
 
 SRC_ASM	=	$(addprefix src/asm/,	\
 		strlen.asm	\
+		strchr.asm	\
 		memset.asm	\
 		memcpy.asm	\
 		)
