@@ -1,6 +1,6 @@
-	global	my_strchr:function
+	global	strchr:function
 	section	.text
-my_strchr:
+strchr:
 	mov	rax, -1
 	jmp	search
 	ret

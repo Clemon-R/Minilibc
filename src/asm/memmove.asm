@@ -1,6 +1,6 @@
-	global	memcpy:function
+	global	my_memmove:function
 	section	.text
-memcpy:
+my_memmove:
 	xor	rcx, rcx
 	mov	rax, -1
 	add	rdx, -1
@@ -9,10 +9,11 @@ memcpy:
 	ret
 
 setter:
-	add	rax, 1
-	mov	rcx, [rsi + rax]
-	mov	[rdi + rax], rcx
+	inc	rax
 	cmp	rax, rdx
 	jl	setter
+	dec	rax
+	mov	rcx, [rsi + rax]
+	mov	[rdi + rax], rcx
 	mov	rax, rdi
 	ret
