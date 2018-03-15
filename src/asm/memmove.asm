@@ -10,10 +10,9 @@ my_memmove:
 
 setter:
 	inc	rax
-	cmp	rax, rdx
-	jl	setter
-	dec	rax
 	mov	rcx, [rsi + rax]
 	mov	[rdi + rax], rcx
+	cmp	rax, rdx
+	jl	setter
 	mov	rax, rdi
 	ret

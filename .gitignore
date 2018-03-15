@@ -4,3 +4,5 @@
 *.#*
 *a.out
 *main.c
+*test.sh
+*.so

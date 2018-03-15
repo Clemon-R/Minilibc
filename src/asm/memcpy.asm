@@ -10,8 +10,9 @@ memcpy:
 
 setter:
 	add	rax, 1
-	mov	rcx, [rsi + rax]
-	mov	[rdi + rax], rcx
+	mov	cl, [rsi + rax]
+	movzx	rcx, cl
+	mov	[rdi + rax], cl
 	cmp	rax, rdx
 	jl	setter
 	mov	rax, rdi
