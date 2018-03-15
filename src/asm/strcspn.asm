@@ -1,6 +1,6 @@
-	global	strpbrk:function
+	global	strcspn:function
 	section	.text
-strpbrk:
+strcspn:
 	xor	rax, rax
 	mov	rbx, -1
 	jmp	search
@@ -20,17 +20,16 @@ find:
 	inc	r10
 	mov	cl, [rsi + r10]
 	cmp	cl, 0
-	je	search
-	cmp	cl, dl
 	je	found
+	cmp	cl, dl
+	je	search
 	jne	find
 	ret
 
 found:
-	mov	rax, rdi
-	add	rax, rbx
+	inc	rax
+	jmp	search
 	ret
 
 notfound:
-	xor	rax, rax
 	ret
