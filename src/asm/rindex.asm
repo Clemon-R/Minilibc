@@ -3,7 +3,8 @@
 rindex:
 	xor	rax, rax
 	xor	rdx, rdx
-	jmp	find
+	cmp	rdi, 0
+	jnz	find
 	ret
 
 search:

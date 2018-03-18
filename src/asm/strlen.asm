@@ -2,7 +2,13 @@
 	section	.text
 strlen:
 	mov	rax, -1
-	jmp	count
+	cmp	rdi, 0
+	jnz	count
+	je	notfound
+	ret
+
+notfound:
+	xor	rax, rax
 	ret
 
 count:
