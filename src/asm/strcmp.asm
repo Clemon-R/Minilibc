@@ -3,11 +3,16 @@
 strcmp:
 	mov	rcx, -1
 	xor	rax, rax
-	jmp	check
+	cmp	rdi, rsi
+	jne	check
 	ret
 
 check:
 	inc	rcx
+	cmp	rsi, 0
+	je	bigger
+	cmp	rdi, 0
+	je	lower
 	mov	bl, [rdi + rcx]
 	mov	dl, [rsi + rcx]
 	cmp	bl, 0

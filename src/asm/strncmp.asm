@@ -3,7 +3,8 @@
 strncmp:
 	mov	r10, -1
 	xor	rax, rax
-	jmp	check
+	cmp	rdi, rsi
+	jne	check
 	ret
 
 check:
