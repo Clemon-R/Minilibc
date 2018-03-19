@@ -1,23 +1,21 @@
 	global	memset:function
 	section	.text
 memset:
-	mov	rax, -1
+	mov	rbx, -1
+	mov	rax, rdi
 	add	rdx, -1
 	cmp	rdi, 0
 	je	notfound
 	cmp	rdx, 0
 	jg	setter
-	mov	rax, rdi
 	ret
 
 notfound:
-	mov	rax, rdi
 	ret
 
 setter:
-	inc	rax
-	mov	[rdi + rax], rsi
-	cmp	rax, rdx
+	inc	rbx
+	mov	[rdi + rbx], rsi
+	cmp	rbx, rdx
 	jl	setter
-	jmp	notfound
 	ret

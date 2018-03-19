@@ -1,26 +1,28 @@
 	global	strchr:function
 	section	.text
 strchr:
-	mov	rax, -1
-	jmp	search
+	xor	rax, rax
+	xor	rdx, rdx
+	cmp	rdi, 0
+	jnz	search
 	ret
 
 search:
-	add	rax, 1
-	mov	bl, [rdi + rax]
-	movzx	rcx, bl
-	cmp	rcx, 0
-	jnz	found
-	cmp	rcx, 0
-	je	notfound
+	mov	bl, [rdi + rdx]
+	movzx	rbx, bl
+	cmp	rsi, rbx
+	je	find
+	inc	rdx
+	cmp	rbx, 0
+	jnz	search
 	ret
 
 notfound:
 	xor	rax, rax
 	ret
 
-found:
-	cmp	rcx, rsi
-	jne	search
-	add	rax, rdi
+find:
+	mov	rax, rdi
+	add	rax, rdx
+	inc	rdx
 	ret

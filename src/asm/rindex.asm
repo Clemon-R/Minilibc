@@ -12,10 +12,9 @@ search:
 	movzx	rbx, bl
 	cmp	rsi, rbx
 	je	find
-	cmp	rbx, 0
-	je	notfound
 	inc	rdx
-	jmp	search
+	cmp	rbx, 0
+	jnz	search
 	ret
 
 notfound:
