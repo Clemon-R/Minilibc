@@ -4,7 +4,7 @@ rindex:
 	xor	rax, rax
 	xor	rdx, rdx
 	cmp	rdi, 0
-	jnz	find
+	jnz	search
 	ret
 
 search:
@@ -12,9 +12,10 @@ search:
 	movzx	rbx, bl
 	cmp	rsi, rbx
 	je	find
-	cmp	rbc, 0
+	cmp	rbx, 0
 	je	notfound
 	inc	rdx
+	jmp	search
 	ret
 
 notfound:
@@ -25,5 +26,6 @@ find:
 	mov	rax, rdi
 	add	rax, rdx
 	inc	rdx
-	jmp	search
+	cmp	rbx, 0
+	jnz	search
 	ret

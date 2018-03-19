@@ -3,7 +3,9 @@
 strstr:
 	xor	rax, rax
 	mov	rbx, -1
-	jmp	search
+	cmp	rdi, rsi
+	jne	search
+	mov	rax, rdi
 	ret
 
 search:
