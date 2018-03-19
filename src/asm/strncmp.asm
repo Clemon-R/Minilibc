@@ -2,6 +2,7 @@
 	section	.text
 strncmp:
 	mov	r10, -1
+	dec	rdx
 	xor	rax, rax
 	cmp	rdi, rsi
 	jne	check
@@ -13,18 +14,25 @@ check:
 	mov	cl, [rsi + r10]
 	cmp	bl, 0
 	jnz	check_next
+	mov	rax, -1
 	ret
 
 check_next:
 	cmp	cl, 0
 	jnz	cmp
+	mov	rax, 1
 	ret
 
 cmp:
+	cmp	rdx, r10
+	je	end
 	cmp	bl, cl
 	je	possiblecheck
 	jg	bigger
 	jl	lower
+	ret
+
+end:
 	ret
 
 possiblecheck:

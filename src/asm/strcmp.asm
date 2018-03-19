@@ -17,11 +17,13 @@ check:
 	mov	dl, [rsi + rcx]
 	cmp	bl, 0
 	jnz	check_next
+	mov	rax, -1
 	ret
 
 check_next:
 	cmp	dl, 0
 	jnz	cmp
+	mov	rax, 1
 	ret
 
 cmp:
