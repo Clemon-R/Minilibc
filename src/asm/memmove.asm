@@ -4,8 +4,9 @@ my_memmove:
 	xor	rcx, rcx
 	mov	rax, -1
 	add	rdx, -1
-	cmp	rax, rdx
-	jl	setter
+	cmp	rdx, -1
+	jg	setter
+	mov	rax, rdi
 	ret
 
 setter:
