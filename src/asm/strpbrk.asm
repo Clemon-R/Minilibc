@@ -3,10 +3,13 @@
 strpbrk:
 	xor	rax, rax
 	mov	rbx, -1
-	jmp	search
+	cmp	rsi, 0
+	jnz	search
 	ret
 
 search:
+	cmp	rdi, 0
+	je	notfound
 	inc	rbx
 	mov	dl, [rdi + rbx]
 	cmp	dl, 0

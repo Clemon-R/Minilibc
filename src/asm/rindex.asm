@@ -12,7 +12,13 @@ search:
 	movzx	rbx, bl
 	cmp	rsi, rbx
 	je	find
+	cmp	rbc, 0
+	je	notfound
 	inc	rdx
+	ret
+
+notfound:
+	xor	rax, rax
 	ret
 
 find:
