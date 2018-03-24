@@ -8,6 +8,7 @@ strcmp:
 	ret
 
 check:
+	xor	rax, rax
 	inc	rcx
 	cmp	rsi, 0
 	je	bigger
