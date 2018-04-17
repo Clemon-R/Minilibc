@@ -1,19 +1,26 @@
-	global	my_memmove:function
+	global	memmove:function
 	section	.text
-my_memmove:
-	xor	rcx, rcx
-	mov	rax, -1
-	add	rdx, -1
-	cmp	rdx, -1
-	jg	setter
+
+memmove:
+	mov	r8, rdi
+	mov	r9, rsi
+	mov	r10, rdx
+	cmp	r8, 0
+	jne	setter	
+	jmp	end
+	ret
+
+end:
 	mov	rax, rdi
 	ret
 
 setter:
-	inc	rax
-	mov	rcx, [rsi + rax]
-	mov	[rdi + rax], rcx
-	cmp	rax, rdx
-	jl	setter
-	mov	rax, rdi
+	mov	cl, [r9]
+	mov	[r8], cl
+	inc	r8
+	inc	r9
+	dec	r10
+	cmp	r10, 0
+	je	end
+	jmp	setter
 	ret

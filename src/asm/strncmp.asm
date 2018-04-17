@@ -1,50 +1,41 @@
 	global	strncmp:function
 	section	.text
 strncmp:
-	mov	r10, -1
-	dec	rdx
+	mov	r8, rdi
+	mov	r9, rsi
+	mov	r10, rdx
 	xor	rax, rax
 	cmp	rdi, rsi
 	jne	check
 	ret
 
-check:
-	inc	r10
-	mov	bl, [rdi + r10]
-	mov	cl, [rsi + r10]
-	cmp	bl, 0
-	jnz	check_next
-	mov	rax, -1
-	ret
-
-check_next:
-	cmp	cl, 0
-	jnz	cmp
-	mov	rax, 1
-	ret
-
-cmp:
-	cmp	rdx, r10
-	je	end
-	cmp	bl, cl
-	je	possiblecheck
-	jg	bigger
-	jl	lower
-	ret
-
-end:
-	ret
-
-possiblecheck:
-	dec	rdx
-	cmp	rdx, 0
-	jg	check
-	ret
-
-bigger:
+greater:
 	mov	rax, 1
 	ret
 
 lower:
 	mov	rax, -1
+	ret
+
+notsame:
+	cmp	cl, dl
+	jg	greater
+	jl	lower
+	ret
+
+find:
+	ret
+
+check:
+	mov	cl, [r8]
+	mov	dl, [r9]
+	cmp	cl, dl
+	jne	notsame
+	cmp	dl, 0
+	je	find
+	inc	r8
+	inc	r9
+	dec	r10
+	cmp	r10, 0
+	jg	check
 	ret

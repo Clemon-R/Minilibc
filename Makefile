@@ -18,6 +18,8 @@ SRC_ASM	=	$(addprefix src/asm/,	\
 		memmove.asm	\
 		memcpy.asm	\
 		rindex.asm	\
+		write.asm	\
+		read.asm	\
 		)
 
 OBJ_ASM	=	$(SRC_ASM:.asm=.o)

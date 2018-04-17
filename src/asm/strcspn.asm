@@ -2,34 +2,34 @@
 	section	.text
 strcspn:
 	xor	rax, rax
-	mov	rbx, -1
+	mov	r8, rdi
 	jmp	search
 	ret
 
-search:
-	inc	rbx
-	mov	dl, [rdi + rbx]
-	cmp	dl, 0
-	je	notfound
-	xor	rcx, rcx
-	mov	r10, -1
-	jmp	find
+end:
 	ret
 
-find:
-	inc	r10
-	mov	cl, [rsi + r10]
-	cmp	cl, 0
-	je	found
-	cmp	cl, dl
-	je	search
-	jne	find
-	ret
-
-found:
+next:
+	inc	r8
 	inc	rax
 	jmp	search
 	ret
 
-notfound:
+check:
+	mov	cl, [r8 + r9]
+	mov	dl, [rsi + r9]
+	cmp	dl, 0
+	je	next
+	cmp	cl, dl
+	je	end
+	inc	r9
+	jne	check
+	ret
+
+search:
+	mov	cl, [r8]
+	xor	r9, r9
+	cmp	cl, 0
+	je	end
+	jne	check
 	ret

@@ -1,40 +1,43 @@
 	global	strstr:function
 	section	.text
 strstr:
-	xor	rax, rax
-	mov	rbx, -1
-	cmp	rdi, rsi
-	jne	search
+	mov	r8, rdi
 	mov	rax, rdi
+	cmp	byte [rsi], 0
+	je	found
+	cmp	r8, 0
+	jne	search
 	ret
 
 search:
-	inc	rbx
-	mov	dl, [rdi + rbx]
-	cmp	dl, 0
+	cmp	byte [r8], 0
 	je	notfound
-	xor	rcx, rcx
-	mov	r10, -1
-	jmp	find
+	xor	r9, r9
+	mov	dl, byte [rsi + r9]
+	mov	cl, byte [r8 + r9]
+	cmp	dl, cl
+	je	check
+	jne	next
 	ret
 
-find:
-	inc	r10
-	push	rbx
-	add	rbx, r10
-	mov	dl, [rdi + rbx]
-	mov	cl, [rsi + r10]
-	pop	rbx
-	cmp	cl, 0
+next:
+	inc	r8
+	jmp	search
+	ret
+
+check:
+	inc	r9
+	mov	dl, byte [rsi + r9]
+	mov	cl, byte [r8 + r9]
+	cmp	dl, 0
 	je	found
 	cmp	cl, dl
-	je	find
-	jne	search
+	je	check
+	jne	next
 	ret
 
 found:
-	mov	rax, rdi
-	add	rax, rbx
+	mov	rax, r8
 	ret
 
 notfound:
