@@ -8,18 +8,11 @@ strcmp:
 	jne	check
 	ret
 
-greater:
-	mov	rax, 1
-	ret
-
-lower:
-	mov	rax, -1
-	ret
-
-notsame:
-	cmp	cl, dl
-	jg	greater
-	jl	lower
+found:
+	movzx	rcx, cl
+	movzx	rdx, dl
+	sub	rcx, rdx
+	mov	rax, rcx
 	ret
 
 find:
@@ -29,7 +22,7 @@ check:
 	mov	cl, [r8]
 	mov	dl, [r9]
 	cmp	cl, dl
-	jne	notsame
+	jne	found
 	cmp	dl, 0
 	je	find
 	inc	r8
